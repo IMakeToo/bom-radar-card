@@ -555,12 +555,16 @@ export class BomRadarCard extends LitElement implements LovelaceCard {
               }
 
               function nextFrame() {
+                lTimeout = timeout;
                 if (run) {
                   nextImage();
                 }
+                if ((idx == frameCount) && (lTimeout < 1000)) {
+                  lTimeout = 1000;
+                }
                 setTimeout(function() {
                   nextFrame();
-                }, timeout);
+                }, lTimeout);
               }
 
               function skipNext() {
